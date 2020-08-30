@@ -637,7 +637,6 @@ set(pcsx2GSSources
 	GS/Renderers/OpenGL/GSTextureOGL.cpp
 	GS/Window/GSSetting.cpp
 	GS/Window/GSWnd.cpp
-	GS/Window/GSLinuxDialog.cpp
 	GS/Window/GSwxDialog.cpp
 	GS/Window/GSWndEGL.cpp
 	)

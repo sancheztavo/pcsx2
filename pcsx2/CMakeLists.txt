@@ -708,7 +708,6 @@ set(pcsx2GSHeaders
 	GS/Window/GSCaptureDlg.h
 	GS/Window/GSDialog.h
 	GS/Window/GSSetting.h
-	GS/Window/GSSettingsDlg.h
 	GS/Window/GSWnd.h
 	GS/Window/GSWndEGL.h
 	GS/Window/GSwxDialog.h

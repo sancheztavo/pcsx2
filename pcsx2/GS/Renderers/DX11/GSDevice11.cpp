@@ -724,17 +724,24 @@ void GSDevice11::StretchRect(GSTexture* sTex, const GSVector4& sRect, GSTexture*
 	StretchRect(sTex, sRect, dTex, dRect, ps, ps_cb, m_convert.bs, linear);
 }
 
-void GSDevice11::StretchRect(GSTexture* sTex, const GSVector4& sRect, GSTexture* dTex, const GSVector4& dRect, bool red, bool green, bool blue, bool alpha)
+void GSDevice11::StretchRectWRGBA(GSTexture* sTex, const GSVector4& sRect, GSTexture* dTex, const GSVector4& dRect, uint8 wrgba)
 {
+	if (!wrgba)
+		return;
+
 	D3D11_BLEND_DESC bd = {};
 	CComPtr<ID3D11BlendState> bs;
 
 	uint8 write_mask = 0;
 
-	if (red)   write_mask |= D3D11_COLOR_WRITE_ENABLE_RED;
-	if (green) write_mask |= D3D11_COLOR_WRITE_ENABLE_GREEN;
-	if (blue)  write_mask |= D3D11_COLOR_WRITE_ENABLE_BLUE;
-	if (alpha) write_mask |= D3D11_COLOR_WRITE_ENABLE_ALPHA;
+	if (wrgba & 1)
+		write_mask |= D3D11_COLOR_WRITE_ENABLE_RED;
+	if (wrgba & (1 << 1))
+		write_mask |= D3D11_COLOR_WRITE_ENABLE_GREEN;
+	if (wrgba & (1 << 2))
+		write_mask |= D3D11_COLOR_WRITE_ENABLE_BLUE;
+	if (wrgba & (1 << 3))
+		write_mask |= D3D11_COLOR_WRITE_ENABLE_ALPHA;
 
 	bd.RenderTarget[0].RenderTargetWriteMask = write_mask;
 

@@ -1329,14 +1329,14 @@ void GSDeviceOGL::StretchRect(GSTexture* sTex, const GSVector4& sRect, GSTexture
 	StretchRect(sTex, sRect, dTex, dRect, ps, m_NO_BLEND, OMColorMaskSelector(), linear);
 }
 
-void GSDeviceOGL::StretchRect(GSTexture* sTex, const GSVector4& sRect, GSTexture* dTex, const GSVector4& dRect, bool red, bool green, bool blue, bool alpha)
+void GSDeviceOGL::StretchRectWRGBA(GSTexture* sTex, const GSVector4& sRect, GSTexture* dTex, const GSVector4& dRect, uint8 wrgba)
 {
+	if (!wrgba)
+		return;
+
 	OMColorMaskSelector cms;
 
-	cms.wr = red;
-	cms.wg = green;
-	cms.wb = blue;
-	cms.wa = alpha;
+	cms.wrgba = wrgba;
 
 	StretchRect(sTex, sRect, dTex, dRect, m_convert.ps[ShaderConvert_COPY], m_NO_BLEND, cms, false);
 }

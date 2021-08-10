@@ -14,6 +14,7 @@
  */
 
 #include "PrecompiledHeader.h"
+#include "GS/Window/GSwxDialog.h"
 #include "GS.h"
 #include "GSUtil.h"
 #include "Renderers/SW/GSRendererSW.h"
@@ -32,7 +33,6 @@
 #include "Renderers/DX11/GSDevice11.h"
 #include "Window/GSWndDX.h"
 #include "Window/GSWndWGL.h"
-#include "Window/GSSettingsDlg.h"
 
 
 static HRESULT s_hr = E_FAIL;
@@ -40,7 +40,6 @@ static HRESULT s_hr = E_FAIL;
 #else
 
 #include "GS/Window/GSWndEGL.h"
-#include "GS/Window/GSwxDialog.h"
 
 #endif
 
@@ -700,22 +699,12 @@ void GSconfigure()
 		theApp.SetConfigDir();
 		theApp.Init();
 
-#ifdef _WIN32
-		GSDialog::InitCommonControls();
-		if (GSSettingsDlg().DoModal() == IDOK)
-		{
-			// Force a reload of the gs state
-			theApp.SetCurrentRendererType(GSRendererType::Undefined);
-		}
-#else
 		if (RunwxDialog())
 		{
 			theApp.ReloadConfig();
 			// Force a reload of the gs state
 			theApp.SetCurrentRendererType(GSRendererType::Undefined);
 		}
-
-#endif
 	}
 	catch (GSRecoverableError)
 	{

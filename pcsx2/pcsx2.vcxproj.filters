@@ -276,9 +276,6 @@
     <None Include="Docs\License.txt">
       <Filter>Docs</Filter>
     </None>
-    <None Include="ps2\eeHwTraceLog.inl">
-      <Filter>System\Ps2\EmotionEngine\Hardware</Filter>
-    </None>
     <None Include="x86\microVU_Alloc.inl">
       <Filter>System\Ps2\EmotionEngine\VU\Dynarec\microVU</Filter>
     </None>
@@ -1646,6 +1643,9 @@
     <ClCompile Include="GS\Window\GSwxDialog.cpp">
       <Filter>System\Ps2\GS\Window</Filter>
     </ClCompile>
+    <ClCompile Include="GS\Renderers\DX11\D3D.cpp">
+      <Filter>System\Ps2\GS\Renderers\Direct3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Patch.h">
@@ -2718,6 +2718,9 @@
     </ClInclude>
     <ClInclude Include="GS\Window\GSwxDialog.h">
       <Filter>System\Ps2\GS\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="GS\Renderers\DX11\D3D.h">
+      <Filter>System\Ps2\GS\Renderers\Direct3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

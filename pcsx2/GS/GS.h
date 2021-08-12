@@ -23,6 +23,7 @@
 #include "GS_types.h"
 #include "Window/GSSetting.h"
 #include "SaveState.h"
+#include <fmt/core.h>
 
 #ifdef _WIN32
 

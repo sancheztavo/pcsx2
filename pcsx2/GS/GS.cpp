@@ -206,8 +206,9 @@ int _GSopen(void** dsp, const char* title, GSRendererType renderer, int threads 
 						default:
 							break;
 					}
-#endif
-#if defined(__unix__)
+#elif defined(__APPLE__)
+					// No windows available for macOS at the moment
+#elif defined(__unix__)
 					wnds.push_back(std::make_shared<GSWndOGL>());
 #else
 					wnds.push_back(std::make_shared<GSWndWGL>());
@@ -216,6 +217,8 @@ int _GSopen(void** dsp, const char* title, GSRendererType renderer, int threads 
 				default:
 #ifdef _WIN32
 					wnds.push_back(std::make_shared<GSWndDX>());
+#elif defined(__APPLE__)
+					// No windows available for macOS at the moment
 #else
 					wnds.push_back(std::make_shared<GSWndOGL>());
 #endif

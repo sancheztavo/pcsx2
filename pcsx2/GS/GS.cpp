@@ -39,6 +39,7 @@ static HRESULT s_hr = E_FAIL;
 
 #else
 
+#include "GS/Window/GSWndOGL.h"
 #include "GS/Window/GSWndEGL.h"
 
 #ifdef __APPLE__
@@ -187,7 +188,7 @@ int _GSopen(void** dsp, const char* title, GSRendererType renderer, int threads 
 			{
 				case GSRendererType::OGL_HW:
 				case GSRendererType::OGL_SW:
-#if defined(__unix__)
+#if defined(EGL_SUPPORTED) && defined(__unix__)
 					// Note: EGL code use GLX otherwise maybe it could be also compatible with Windows
 					// Yes OpenGL code isn't complicated enough !
 					switch (GSWndEGL::SelectPlatform())
@@ -205,8 +206,9 @@ int _GSopen(void** dsp, const char* title, GSRendererType renderer, int threads 
 						default:
 							break;
 					}
-#elif defined(__APPLE__)
-					// No windows available for macOS at the moment
+#endif
+#if defined(__unix__)
+					wnds.push_back(std::make_shared<GSWndOGL>());
 #else
 					wnds.push_back(std::make_shared<GSWndWGL>());
 #endif
@@ -214,10 +216,8 @@ int _GSopen(void** dsp, const char* title, GSRendererType renderer, int threads 
 				default:
 #ifdef _WIN32
 					wnds.push_back(std::make_shared<GSWndDX>());
-#elif defined(__APPLE__)
-					// No windows available for macOS at the moment
 #else
-					wnds.push_back(std::make_shared<GSWndEGL_X11>());
+					wnds.push_back(std::make_shared<GSWndOGL>());
 #endif
 					break;
 			}

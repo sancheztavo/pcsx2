@@ -27,6 +27,10 @@
 #include "PAD/Linux/PAD.h"
 #endif
 
+#ifdef __UNIX__
+#include <X11/Xlib.h>
+#endif
+
 #include "ps2/BiosTools.h"
 
 #include "Dialogs/ModalPopups.h"
@@ -67,7 +71,18 @@
 #undef ECX
 #include <wx/osx/private.h>		// needed to implement the app!
 #endif
-wxIMPLEMENT_APP(Pcsx2App);
+
+wxIMPLEMENT_APP_NO_MAIN(Pcsx2App);
+IMPLEMENT_WX_THEME_SUPPORT;
+
+int main(int argc, char *argv[]) {
+#ifdef __UNIX__
+	// This is to make __GL_THREADED_OPTIMIZATIONS=1 actually work in Nvidia linux drivers
+	XInitThreads();
+#endif
+	return wxEntry(argc, argv);
+}
+
 
 std::unique_ptr<AppConfig> g_Conf;
 

@@ -913,12 +913,14 @@ else(WIN32)
 	list(APPEND pcsx2GSSources
 		GS/GS_res.cpp
 		GS/Window/GSLinuxDialog.cpp
+		GS/Window/GSWndOGL.cpp
 		GS/Window/GSWndEGL.cpp
 	)
 
 	list(APPEND pcsx2GSHeaders
 		GS/GS_res.h
-		GS/Window/GSWndEGL.h
+		GS/Window/GSWndOGL.h
+		GS/Window/GSWndEGL.h		
 	)
 endif(WIN32)
 

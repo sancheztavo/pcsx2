@@ -15,7 +15,7 @@
 
 #include "GSWnd.h"
 
-#if defined(__unix__)
+#if defined(__unix__) && defined(EGL_SUPPORTED)
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 
